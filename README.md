@@ -64,6 +64,7 @@ Filter Params:
 
 ## Quick testing
 
+```shell
 curl -X POST -F "file=@/Users/esteban/Documents/Projects/ecommerce_platform/data/products.csv;filename=products.csv;type=text/csv" http://localhost:3000/products -v
 
 curl http://localhost:3000/products\?upc=123143 -v
