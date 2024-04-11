@@ -54,13 +54,16 @@ Code: 200
 
 Filter Params:
 
-name: Returns all products with the given name.
-primary_category: Returns all products with the given primary category.
-model_number: Returns all products with the given model number.
-upc: Returns all products with the given UPC.
-sku: Returns all products with the given SKU.
+- name: Returns all products with the given name.
+- primary_category: Returns all products with the given primary category.
+- model_number: Returns all products with the given model number.
+- upc: Returns all products with the given UPC.
+- sku: Returns all products with the given SKU.
 
-```shell
+  
+
+## Quick testing
+
 curl -X POST -F "file=@/Users/esteban/Documents/Projects/ecommerce_platform/data/products.csv;filename=products.csv;type=text/csv" http://localhost:3000/products -v
 
 curl http://localhost:3000/products\?upc=123143 -v
