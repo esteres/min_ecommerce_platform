@@ -1,0 +1,652 @@
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-04-10 00:44:47.515697', '2024-04-10 00:44:47.515701') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProducts (20240408205851)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "products" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" varchar, "price" decimal, "primary_category" varchar, "secondary_category" varchar, "model_number" varchar, "upc" varchar, "sku" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240408205851') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 19:58:13 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/bulk_upload_from_csv"):
+  
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 19:59:21 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010e0ecc20 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-67722-opjefc.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 500 Internal Server Error in 100ms (ActiveRecord: 0.0ms | Allocations: 16546)
+
+
+  
+Zeitwerk::NameError (expected file /Users/esteban/Documents/Projects/ecommerce_platform/app/services/products/import_from_csv_service.rb to define constant Products::ImportFromCsvService, but didn't
+
+      raise Zeitwerk::NameError.new(msg, cref.last)
+      ^^^^^):
+  
+app/controllers/products_controller.rb:9:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:00:48 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010ef5f7a8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-7n0no2.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.0ms | Allocations: 7611)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/services/products/import_from_csv_service.rb:19:in `initialize'
+app/controllers/products_controller.rb:9:in `new'
+app/controllers/products_controller.rb:9:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:04:15 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010e60c930 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-5cewwh.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 2472)
+
+
+  
+NameError (undefined local variable or method `csv' for #<Products::ImportFromCsvService:0x000000010edf5160 @csv=#<ActionDispatch::Http::UploadedFile:0x000000010e60c930 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-5cewwh.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">, @file_name="products.csv">
+
+      if csv.is_a(String)
+         ^^^
+Did you mean?  csv?
+               @csv
+               CSV):
+  
+app/services/products/import_from_csv_service.rb:75:in `read_csv'
+app/services/products/import_from_csv_service.rb:22:in `initialize'
+app/controllers/products_controller.rb:9:in `new'
+app/controllers/products_controller.rb:9:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:04:36 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010fc87e58 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-3qnowy.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms | Allocations: 1871)
+
+
+  
+NoMethodError (undefined method `is_a' for #<ActionDispatch::Http::UploadedFile:0x000000010fc87e58 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-3qnowy.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">
+
+      if csv.is_a(String)
+            ^^^^^
+Did you mean?  is_a?):
+  
+app/services/products/import_from_csv_service.rb:75:in `read_csv'
+app/services/products/import_from_csv_service.rb:22:in `initialize'
+app/controllers/products_controller.rb:9:in `new'
+app/controllers/products_controller.rb:9:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:06:48 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010f8e6290 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-vv6q9u.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.0ms | Allocations: 1846)
+
+
+  
+NoMethodError (private method `success?' called for #<Products::ImportFromCsvService:0x000000010ee07068 @csv=#<ActionDispatch::Http::UploadedFile:0x000000010f8e6290 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-vv6q9u.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">, @file_name="products.csv", @parsed_csv=[{:item_numbersku=>"786987605", :upc=>"123140", :item_name=>"Frilly Pillow", :item_description=>"Synthetic", :price=>"19.99", :stylemodelnumbername=>"15587", :primary_category=>"Living Room", :subcategory=>"Textile"}, {:item_numbersku=>"001-74227", :upc=>"123143", :item_name=>"Carpet", :item_description=>"Polyester", :price=>"290.99", :stylemodelnumbername=>"M-590X", :primary_category=>"Apartment", :subcategory=>"Textile"}], @error={:error=>"Incorrect file format"}>
+
+    if service.success?
+              ^^^^^^^^^):
+  
+app/controllers/products_controller.rb:12:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:07:45 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010fbb4418 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-69620-tvq4dw.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 422 Unprocessable Entity in 4ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 1097)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:09:07 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010a60d2a8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-71451-h9sefq.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 422 Unprocessable Entity in 36782ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 243331)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:10:22 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010681d0b0 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-71769-ahvw4x.csv>, @content_type="application/octet-stream", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: application/octet-stream\r\n">}
+Completed 422 Unprocessable Entity in 236933ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 211938)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:14:37 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000011336ec28 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-72654-vgrxki.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 422 Unprocessable Entity in 51648ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 200557)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:16:10 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000011442ff80 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-72654-2lwk1g.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 422 Unprocessable Entity in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 1484)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:17:12 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x0000000107183f00 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-73252-zy7bss.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 422 Unprocessable Entity in 88628ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 191524)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:18:45 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001075ea0d0 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-73252-3mbiu3.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed   in 29946ms (ActiveRecord: 2.6ms | Allocations: 264842)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:20:16 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x0000000108ef79d8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-73931-aax52q.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+Completed 500 Internal Server Error in 419656ms (ActiveRecord: 5.3ms | Allocations: 316838)
+
+
+  
+ArgumentError (No unique index found for upc):
+  
+app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+app/services/products/import_from_csv_service.rb:29:in `run'
+app/controllers/products_controller.rb:10:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:27:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x0000000106f156d8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-75376-l5y0aj.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:40:in `bulk_insert'
+Completed 500 Internal Server Error in 55900ms (ActiveRecord: 4.4ms | Allocations: 214550)
+
+
+  
+ArgumentError (No unique index found for upc):
+  
+app/services/products/import_from_csv_service.rb:41:in `block in bulk_insert'
+app/services/products/import_from_csv_service.rb:40:in `bulk_insert'
+app/services/products/import_from_csv_service.rb:29:in `run'
+app/controllers/products_controller.rb:10:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:28:41 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010e1fd678 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-75672-lt6s6m.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:40:in `bulk_insert'
+Completed 500 Internal Server Error in 1314527ms (ActiveRecord: 5.0ms | Allocations: 248165)
+
+
+  
+ArgumentError (No unique index found for upc):
+  
+app/services/products/import_from_csv_service.rb:41:in `block in bulk_insert'
+app/services/products/import_from_csv_service.rb:40:in `bulk_insert'
+app/services/products/import_from_csv_service.rb:29:in `run'
+app/controllers/products_controller.rb:10:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:50:51 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010aef4588 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-80096-g8xdx.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 500 Internal Server Error in 47ms (ActiveRecord: 2.3ms | Allocations: 14991)
+
+
+  
+NameError (uninitialized constant Products::ImportFromCsvService::HEADERS_MAPPING
+
+        HEADERS_MAPPING.each do |key, csv_header|
+        ^^^^^^^^^^^^^^^):
+  
+app/services/products/import_from_csv_service.rb:67:in `block in transform_parsed_csv'
+app/services/products/import_from_csv_service.rb:65:in `map'
+app/services/products/import_from_csv_service.rb:65:in `transform_parsed_csv'
+app/services/products/import_from_csv_service.rb:31:in `block in bulk_insert'
+app/services/products/import_from_csv_service.rb:29:in `bulk_insert'
+app/services/products/import_from_csv_service.rb:19:in `run'
+app/controllers/products_controller.rb:10:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:53:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010e3c7aa8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-80629-9vgwx1.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 500 Internal Server Error in 93941ms (ActiveRecord: 2.2ms | Allocations: 411427)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:55:11 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001118bdb90 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-81053-ipnarr.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed   in 19193ms (ActiveRecord: 2.2ms | Allocations: 232401)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:55:37 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001112ac968 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-81182-cas32n.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed   in 44634ms (ActiveRecord: 2.2ms | Allocations: 84415)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:57:30 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010d1dc140 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-81402-z5qzv8.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed   in 63511ms (ActiveRecord: 0.0ms | Allocations: 64909)
+
+
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 20:58:45 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001144bd150 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-81902-v6ahhl.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+Completed 500 Internal Server Error in 41716ms (ActiveRecord: 36.3ms | Allocations: 198721)
+
+
+  
+ArgumentError (No unique index found for upc):
+  
+app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+app/services/products/import_from_csv_service.rb:30:in `run'
+app/controllers/products_controller.rb:10:in `bulk_upload_from_csv'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 21:02:27 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#bulk_upload_from_csv as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010615d8d8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240409-82617-gaq542.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mProduct Bulk Insert (1.3ms)[0m  [1m[32mINSERT INTO "products" ("sku","upc","name","description","price","model_number","primary_category","secondary_category","created_at","updated_at") VALUES ('786987605', '123140', 'Frilly Pillow', 'Synthetic', 19.99, '15587', 'Living Room', 'Textile', STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'), STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')), ('001-74227', '123143', 'Carpet', 'Polyester', 290.99, 'M-590X', 'Apartment', 'Textile', STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'), STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')) ON CONFLICT  DO NOTHING RETURNING "id","sku","upc","name","description","price","model_number","primary_category","secondary_category"[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+Completed 201 Created in 6496ms (Views: 0.2ms | ActiveRecord: 5.7ms | Allocations: 183379)
+
+
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 21:07:18 -0500
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for ProductsController):
+  
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:155:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started POST "/products/bulk_upload_from_csv" for 127.0.0.1 at 2024-04-09 21:07:49 -0500
+Processing by ProductsController#bulk_upload_from_csv as */*
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 204)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:20:45 -0500
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 497)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0; required keyword: filter_params)):
+  
+app/services/products/pull_service.rb:5:in `initialize'
+app/controllers/products_controller.rb:3:in `new'
+app/controllers/products_controller.rb:3:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:21:17 -0500
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 2160)
+
+
+  
+NameError (undefined local variable or method `search_params' for #<Products::PullService:0x000000010738c6a8 @filter_params=#<ActionController::Parameters {} permitted: true>>
+
+      if search_params.any?
+         ^^^^^^^^^^^^^):
+  
+app/services/products/pull_service.rb:11:in `run'
+app/controllers/products_controller.rb:3:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:21:35 -0500
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 1978)
+
+
+  
+NoMethodError (undefined method `any?' for #<ActionController::Parameters {} permitted: true>
+
+      if filter_params.any?
+                      ^^^^^):
+  
+app/services/products/pull_service.rb:11:in `run'
+app/controllers/products_controller.rb:3:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:23:15 -0500
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms | Allocations: 4269)
+
+
+  
+NameError (uninitialized constant ProductsController::ProductSerializer
+
+    render json: products, each_serializer: ProductSerializer, status: :ok
+                                            ^^^^^^^^^^^^^^^^^):
+  
+app/controllers/products_controller.rb:4:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:23:39 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 0.0ms | Allocations: 10633)
+
+
+  
+NameError (uninitialized constant ActiveModel::Serializer
+
+class ProductSerializer < ActiveModel::Serializer
+                                     ^^^^^^^^^^^^
+Did you mean?  ActiveModel::Serializers):
+  
+app/serializers/product_serializer.rb:1:in `<main>'
+app/controllers/products_controller.rb:4:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:31:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 0.0ms | Allocations: 10638)
+
+
+  
+NameError (uninitialized constant ProductsController::ProductSerializer
+
+    render json: products, each_serializer: ProductSerializer, status: :ok
+                                            ^^^^^^^^^^^^^^^^^):
+  
+app/controllers/products_controller.rb:4:in `index'
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:37:13 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.68ms)
+Completed 200 OK in 124ms (Views: 82.3ms | ActiveRecord: 3.1ms | Allocations: 29080)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:42:27 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.75ms)
+Completed 200 OK in 29847ms (Views: 44.7ms | ActiveRecord: 2.3ms | Allocations: 320686)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-04-09 22:44:15 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.44ms)
+Completed 200 OK in 6785ms (Views: 2.1ms | ActiveRecord: 0.1ms | Allocations: 221841)
+
+
+Started GET "/products?upc=123140" for 127.0.0.1 at 2024-04-09 22:45:17 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123140"}
+Completed 500 Internal Server Error in 38187ms (ActiveRecord: 0.0ms | Allocations: 272929)
+
+
+  
+NoMethodError (undefined method `map' for #<ActionController::Parameters {"upc"=>"123140"} permitted: true>
+
+        filter_params.map do |key, value|
+                     ^^^^
+Did you mean?  tap):
+  
+app/services/products/pull_service.rb:13:in `run'
+app/controllers/products_controller.rb:4:in `index'
+Started GET "/products?upc=123140" for 127.0.0.1 at 2024-04-09 22:46:44 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123140"}
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123140')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.55ms)
+Completed 200 OK in 78ms (Views: 42.4ms | ActiveRecord: 2.3ms | Allocations: 28373)
+
+
+Started GET "/products?upc=123141" for 127.0.0.1 at 2024-04-09 22:46:51 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123141"}
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123141')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.59ms)
+Completed 200 OK in 34ms (Views: 23.8ms | ActiveRecord: 0.2ms | Allocations: 1136)
+
+
+Started GET "/" for ::1 at 2024-04-10 19:01:16 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/esteban/.rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/esteban/.rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.5ms | Allocations: 381)
+Completed 200 OK in 81ms (Views: 24.5ms | ActiveRecord: 0.0ms | Allocations: 7268)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:38:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+AbstractController::ActionNotFound (The action 'create' could not be found for ProductsController):
+  
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:155:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.10) lib/rack/etag.rb:29:in `call'
+rack (3.0.10) lib/rack/conditional_get.rb:43:in `call'
+rack (3.0.10) lib/rack/head.rb:15:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.10) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.10) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:39:00 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#create as */*
+Completed 400 Bad Request in 45154ms (ActiveRecord: 0.0ms | Allocations: 229089)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: products):
+  
+app/controllers/products_controller.rb:25:in `csv_file_param'
+app/controllers/products_controller.rb:9:in `create'
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:39:58 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#create as */*
+Completed 500 Internal Server Error in 47424ms (ActiveRecord: 0.0ms | Allocations: 267422)
+
+
+  
+NoMethodError (undefined method `permitted' for #<ActionController::Parameters {} permitted: true>
+Did you mean?  permitted=
+               permitted?
+               permit
+               permit!):
+  
+app/controllers/products_controller.rb:9:in `create'
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:40:58 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#create as */*
+Completed 500 Internal Server Error in 10833ms (ActiveRecord: 0.0ms | Allocations: 193014)
+
+
+  
+NameError (undefined local variable or method `file' for #<ProductsController:0x0000000000eb00>
+
+    service = Products::ImportFromCsvService.new(csv: file)
+                                                      ^^^^
+Did you mean?  fail):
+  
+app/controllers/products_controller.rb:14:in `create'
+Started GET "/products?upc=123141" for 127.0.0.1 at 2024-04-11 15:42:15 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123141"}
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123141')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.16ms)
+Completed 200 OK in 39ms (Views: 6.3ms | ActiveRecord: 2.4ms | Allocations: 11714)
+
+
+Started GET "/products?upc=123141" for 127.0.0.1 at 2024-04-11 15:42:32 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123141"}
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123141')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.06ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms | Allocations: 1135)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:43:25 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010c9ce0e8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240411-41793-hbmsl4.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 422 Unprocessable Entity in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 767)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:44:53 -0500
+Processing by ProductsController#create as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010c6a3b70 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240411-41793-nzf369.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 422 Unprocessable Entity in 24372ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 195924)
+
+
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:45:28 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#create as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x000000010a41d268 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240411-42758-zapr88.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+Completed 500 Internal Server Error in 6603ms (ActiveRecord: 0.0ms | Allocations: 197451)
+
+
+  
+NameError (undefined local variable or method `csv_file_para' for #<ProductsController:0x0000000000dac0>
+
+    service = Products::ImportFromCsvService.new(csv: csv_file_para['file'])
+                                                      ^^^^^^^^^^^^^
+Did you mean?  csv_file_param):
+  
+app/controllers/products_controller.rb:14:in `create'
+Started POST "/products" for 127.0.0.1 at 2024-04-11 15:45:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#create as */*
+  Parameters: {"file"=>#<ActionDispatch::Http::UploadedFile:0x00000001144661e8 @tempfile=#<Tempfile:/var/folders/gw/7mq09mts6bq0ng1mwkq5l46r0000gn/T/RackMultipart20240411-42902-f4h9ja.csv>, @content_type="text/csv", @original_filename="products.csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"products.csv\"\r\nContent-Type: text/csv\r\n">}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mProduct Bulk Insert (2.1ms)[0m  [1m[32mINSERT INTO "products" ("sku","upc","name","description","price","model_number","primary_category","secondary_category","created_at","updated_at") VALUES ('786987605', '123140', 'Frilly Pillow', 'Synthetic', 19.99, '15587', 'Living Room', 'Textile', STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'), STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')), ('001-74227', '123143', 'Carpet', 'Polyester', 290.99, 'M-590X', 'Apartment', 'Textile', STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW'), STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')) ON CONFLICT  DO NOTHING RETURNING "id","sku","upc","name","description","price","model_number","primary_category","secondary_category"[0m
+  ↳ app/services/products/import_from_csv_service.rb:42:in `block in bulk_insert'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/products/import_from_csv_service.rb:41:in `bulk_insert'
+Completed 201 Created in 18970ms (Views: 0.5ms | ActiveRecord: 17.0ms | Allocations: 345778)
+
+
+Started GET "/products?upc=123141" for 127.0.0.1 at 2024-04-11 15:46:42 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123141"}
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123141')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.12ms)
+Completed 200 OK in 23ms (Views: 4.5ms | ActiveRecord: 0.1ms | Allocations: 5033)
+
+
+Started GET "/products" for 127.0.0.1 at 2024-04-11 15:46:49 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.12ms)
+Completed 200 OK in 38ms (Views: 37.3ms | ActiveRecord: 0.1ms | Allocations: 16971)
+
+
+Started GET "/products?upc=123143" for 127.0.0.1 at 2024-04-11 15:47:15 -0500
+Processing by ProductsController#index as */*
+  Parameters: {"upc"=>"123143"}
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE (upc = '123143')[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.43ms)
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms | Allocations: 1375)
+
+
