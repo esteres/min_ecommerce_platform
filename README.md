@@ -38,18 +38,30 @@ The CSV file format for importing products is as follows:
     "file": <UploadFile name="products.csv">
   }
   
-Validates that the file is present.
-Creates a product in the database for every record from the CSV file.
-Response:
-Code: 201
-Body: List of created products in JSON format, including the unique IDs.
-GET /products
+- Validates that the file is present.
+- if the file is not provided, returns status code 422
+- Creates a product in the database for every record from the CSV file.
+- The response code is 201, and the response body is the list of created products in JSON format, including the uniq ids.
+
+  
+### GET /products
+
 Returns a JSON of the collection of all products, ordered by ID in increasing order.
+
+
 Response:
 Code: 200
-Params:
+
+Filter Params:
+
 name: Returns all products with the given name.
 primary_category: Returns all products with the given primary category.
 model_number: Returns all products with the given model number.
 upc: Returns all products with the given UPC.
 sku: Returns all products with the given SKU.
+
+```shell
+curl -X POST -F "file=@/Users/esteban/Documents/Projects/ecommerce_platform/data/products.csv;filename=products.csv;type=text/csv" http://localhost:3000/products -v
+
+curl http://localhost:3000/products\?upc=123143 -v
+
