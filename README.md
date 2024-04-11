@@ -24,6 +24,9 @@ Copy code
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 4355468680 | 123140 | Frilly Pillow | Synthetic | 19.99 | 15587 | Living Room | Textil |
 | 001-74227 | 123143 | Carpet | Plyester | 290.99 | M/590X | Apartment | Textile |
+
+
+
 Endpoints
 POST /products
 Accepts CSV file as an input parameter:
